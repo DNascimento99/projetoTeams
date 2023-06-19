@@ -1,6 +1,6 @@
 ## Documentação criada visando guiar a criação de notificações de alterações nos Recursos da AWS
 
-![image-3.png](./image-3.png)
+![image.png](./image.png)
 
 * Criar um grupo no Teams com Webhook
 * Criar o código que irá notificar via Lambda
@@ -26,8 +26,6 @@ Ao criar o CloudTrail, deverá ser:
 * Desabilitar _Criptografia SSE-KMS do arquivo de log_. 
 * Habilitar a opção _Evento de dados_ e selecionar a fonte de dados = S3.
 * Revisar e criar a tilha.
-  1. Exemplo
-    ![image-2.png](./image-2.png)
 
 ## SNS
 Após abrir o SNS deverá ser informado um tópico e uma assinatura para o mesmo para isso deverá ser:
@@ -59,7 +57,7 @@ Após abrir o SNS deverá ser informado um tópico e uma assinatura para o mesmo
         "SNS:ListSubscriptionsByTopic",
         "SNS:Publish"
       ],
-      "Resource": "arn:aws:sns:sa-east-1:'account':bp-notifications-teams-'nome do serviço'",
+      "Resource": "ARN DO SNS",
       "Condition": {
         "StringEquals": {
           "AWS:SourceOwner": "842136179073"
@@ -73,21 +71,21 @@ Após abrir o SNS deverá ser informado um tópico e uma assinatura para o mesmo
         "Service": "cloudtrail.amazonaws.com"
       },
       "Action": "SNS:Publish",
-      "Resource": "arn:aws:sns:sa-east-1:'account':bp-notifications-teams-'nome do serviço'",
+      "Resource": "ARN DO SNS",
       "Condition": {
         "StringEquals": {
-          "AWS:SourceArn": "arn:aws:cloudtrail:sa-east-1:842136179073:trail/bp-notifications-team-s3"
+          "AWS:SourceArn": "ARN DO CLOUDTRAIL"
         }
       }
     },
     {
-      "Sid": "AWSEvents_bp-notifications-teams-ecs_Id8137c9db-f550-4033-8968-67cfeeecc63b",
+      "Sid": "ARN DO EVENTBRIDG",
       "Effect": "Allow",
       "Principal": {
         "Service": "events.amazonaws.com"
       },
       "Action": "sns:Publish",
-      "Resource": "arn:aws:sns:sa-east-1:'account':bp-notifications-teams-'nome do serviço'"
+      "Resource": "ARN DO SNS"
     }
   ]
 }
@@ -97,8 +95,6 @@ Após abrir o SNS deverá ser informado um tópico e uma assinatura para o mesmo
 * Informar o _ARN DO TÓPICO_.
 * Informar o protocolo = _lambda_ e na sequencia informar o _ARN LAMBDA CRIADO PARA EVENTO ESPECÍFICO_.
 * Revisar e criar a assinatura.
-  1. Exemplo
-    ![image.png](./image.png)
 
 
 ## CloudWatch
@@ -108,8 +104,6 @@ Ao abrir a guia do CloudWatch, ir na opção _Regras_ localizada dentro de _Even
 * Marcar _Operações específicas_e informar os _eventsnames_ desejados.(Pode ser informado o json sugerido como teste do lambda).
 * Em destino, informar o _SNS_ desejado e deverá ser adicionado mais um destino informando o _ARN LAMBDA CRIADO PARA EVENTO ESPECÍFICO_.
 * Revisar e criar o evento.
-  1. Exemplo
-    ![image-1.png](./image-1.png)
 
 
 ## Após realizar todas as configurações efetuar o teste, caso o mesmo tenha exito, será notificado no seu teams.

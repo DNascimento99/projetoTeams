@@ -1,0 +1,17 @@
+{
+    "source": [
+      "aws.autoscaling"
+    ],
+    "detail-type": [
+      "AWS API Call via CloudTrail"
+    ],
+    "detail": {
+      "eventSource": [
+        "autoscaling.amazonaws.com"
+      ],
+      "eventName": [
+        "DeleteTags",
+        "CreateOrUpdateTags"
+      ]
+    }
+}  

@@ -60,7 +60,7 @@ Após abrir o SNS deverá ser informado um tópico e uma assinatura para o mesmo
       "Resource": "ARN DO SNS",
       "Condition": {
         "StringEquals": {
-          "AWS:SourceOwner": "842136179073"
+          "AWS:SourceOwner": "ID_ACCOUNT"
         }
       }
     },
